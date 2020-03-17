@@ -2,9 +2,14 @@ from controller import Robot
 
 TIME_STEP = 1000
 robot = Robot()
+from controller import Robot
+import random
 
-left=[1,1,1,1,1,1,1,1,1,1,1,1,-1,-1,-1,-1,1,1,1,1]
-right=[1,1,1,1,-1,-1,-1,-1,1,1,1,1,1,1,1,1,1,1,1,1]
+TIME_STEP = 1000 #miliseconds
+robot = Robot()
+
+left=[1,1,1,1,3,3,3,3,3]
+right=[1,1,1,1,-3,-3,-3,-3,-3]
 power=1
 
 ds = []
@@ -21,22 +26,23 @@ for i in range(4):
     wheels[i].setVelocity(0.0)
     
 avoidObstacleCounter = 0
-i=0
+step=0
 
 while robot.step(TIME_STEP)!=-1:
 
-    leftSpeed=left[i]*power
-    rightSpeed=right[i]*power       
+    leftSpeed=left[step]*power
+    rightSpeed=right[step]*power
                 
     wheels[0].setVelocity(leftSpeed)
     wheels[1].setVelocity(rightSpeed)
     wheels[2].setVelocity(leftSpeed)
     wheels[3].setVelocity(rightSpeed)
 
-    if i<19:
-        i=i+1
-    if i==19:
-        i=0
+    if step<9:
+        step=step+1
+    if step==9:
+        step=0
         
-    print (i)
+    print (step)
+    
     

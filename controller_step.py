@@ -28,10 +28,20 @@ for i in range(4):
 avoidObstacleCounter = 0
 step=0
 
+avoidObstacleCounter = 0
 while robot.step(TIME_STEP)!=-1:
 
     leftSpeed=left[step]*power
     rightSpeed=right[step]*power
+
+    if avoidObstacleCounter > 0:
+        avoidObstacleCounter -= 10
+        leftSpeed = 1
+        rightSpeed = -1
+    else:  # read sensors
+        for i in range(2):
+            if ds[i].getValue() < 950.0:
+                avoidObstacleCounter = 100
                 
     wheels[0].setVelocity(leftSpeed)
     wheels[1].setVelocity(rightSpeed)
@@ -44,5 +54,8 @@ while robot.step(TIME_STEP)!=-1:
         step=0
         
     print (step)
-    
+
+
+
+
     
